@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# KC Authenticator
 
-First, run the development server:
+**KC Authenticator** is a robust authentication solution designed for developers to easily integrate authentication services into their applications. This app provides features such as account management, password recovery, and secure authentication mechanisms, making it a reliable tool for handling user authentication.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **User Authentication:** Secure login system that can be easily integrated into developer applications.
+- **Account Management:** Developers can manage multiple user accounts within their applications.
+- **Password Recovery:** Built-in functionality to handle password recovery through email-based reset links.
+- **Responsive UI:** Modern, responsive design using Material UI to ensure compatibility across devices.
+- **Secure Backend:** Utilizes MongoDB, Spring Boot, and OTP email services for a secure backend infrastructure.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+- Node.js
+- MongoDB (Atlas or local)
+- A mail service (for OTP functionality)
 
-## Learn More
+### Steps to install
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/kc-authenticator.git
+   cd kc-authenticator
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### For Developers
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Register Your Application:** Developers can create accounts and register multiple applications within KC Authenticator.
+2. **User Authentication:** Once the application is registered, you can integrate KC Authenticator's login service into your app using provided API endpoints.
+
+### API
+
+KC Authenticator provides RESTful APIs for:
+- **User registration**
+- **Login and token management**
+- **Password reset**
+
+For API documentation, please refer to the [API Guide](link-to-api-doc).
+
+## Tech Stack
+
+- **Frontend:** Next.js, React, TypeScript, Material UI
+- **Backend:** Spring Boot, MongoDB, Lombok
+- **Authentication:** OTP, Password Hashing
+- **UI Animations:** React Spring for fluid animations
+
+## Contributing
+
+Feel free to fork the project and submit pull requests. Contributions are always welcome.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
