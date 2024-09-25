@@ -112,7 +112,7 @@ export default function Login() {
           <Box textAlign="center" mt={1}>
             <Link href={path + '/register'}>
               <Typography sx={{ textDecoration: 'underline', color: theme.palette.primary.main }} variant="body2">
-                Don't have an account? Sign Up
+                Don&apos;t have an account? Sign Up
               </Typography>
             </Link>
           </Box>

@@ -7,9 +7,9 @@ import theme from './theme';
 import { Provider } from 'react-redux';
 import store, { persistor } from '@/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import heroBg from '../../public/images/herobg.jpg'
+import heroBg from '../../public/images/herobg.jpg';
 
-export default function Main({ children }: { children: any }) {
+export default function Main({ children }: any) {
   const gradientAnimation = useSpring({
     from: { backgroundPosition: '0% 50%' },
     to: { backgroundPosition: '100% 50%' },
@@ -17,7 +17,7 @@ export default function Main({ children }: { children: any }) {
     loop: { reverse: true },
   });
 
-  const gradientBackground = `linear-gradient(to bottom right,${theme.palette.primary.light}, ${theme.palette.primary.dark})`;
+  // const gradientBackground = `linear-gradient(to bottom right,${theme.palette.primary.light}, ${theme.palette.primary.dark})`;
 
   return (
     <Provider store={store}>

@@ -10,9 +10,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-export default function user() {
-  const path = usePathname();
-  const user: USER = useSelector((state: any) => state.user.userInfo);
+export default function User() {
+  const Path = usePathname();
+  const User: USER = useSelector((state: any) => state.user.userInfo);
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
@@ -30,23 +30,23 @@ export default function user() {
         }}
       >
         {/* <Avatar
-          src={user.profilePicture} // Assuming user.profilePicture is a URL to the image
-          alt={`${user.firstName} ${user.lastName}`}
+          src={User.profilePicture} // Assuming User.profilePicture is a URL to the image
+          alt={`${User.firstName} ${User.lastName}`}
           sx={{ width: 100, height: 100, marginBottom: 2 }} // Style for Avatar
         /> */}
         <AccountCircleIcon fontSize="large" />
 
         <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
-          {user.firstName}&nbsp;{user.lastName}
+          {User.firstName}&nbsp;{User.lastName}
         </Typography>
         <Typography variant="body2" sx={{ color: 'gray', mb: 1 }}>
-          {user.phone}
+          {User.phone}
         </Typography>
         <Typography variant="body2" sx={{ color: 'gray', mb: 2 }}>
-          {user.devEmail}
+          {User.devEmail}
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <Link href={path + '/edit'}>
+          <Link href={Path + '/edit'}>
             <Button variant="outlined" fullWidth sx={{ my: 1.5, justifyContent: 'space-evenly' }}>
               <EditIcon fontSize="small" />
               <Typography>Edit Profile</Typography>

@@ -10,7 +10,7 @@ import Menu from '@mui/material/Menu';
 import { useTheme } from '@mui/material';
 import { MouseEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, setUserInfo } from '@/store/store';
+import { logout } from '@/store/store';
 import { redirect, usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
