@@ -20,6 +20,11 @@ export interface RESPONSE {
   message: string;
   isSuccess: boolean;
 }
+export interface EDITUSER {
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
 
 export interface OTP {
   referenceId: string;

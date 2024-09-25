@@ -81,3 +81,24 @@ export const passwordValidator = (data: {
 	return { isValid, errors };
 };
 
+export const profileEditValidator = (data: {
+	[key: string]: string;
+}): ValidationResult => {
+	const errors: string[] = [];
+	let isValid = true;
+
+	// First name validation
+	if (data.firstName.trim() === '') {
+		isValid = false;
+		errors.push('First name is required.');
+	}
+
+	// Phone number validation (basic validation)
+	const phonePattern = /^\+?[1-9]\d{1,14}$/; // E.164 format
+	if (!phonePattern.test(data.phone)) {
+		isValid = false;
+		errors.push('Please enter a valid phone number.');
+	}
+
+	return { isValid, errors };
+};

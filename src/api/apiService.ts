@@ -1,4 +1,4 @@
-import { LOGIN, OTP, PASSWORDRESET, UPDATEPASSWORD } from '@/types/interfaces';
+import { EDITUSER, LOGIN, OTP, PASSWORDRESET, UPDATEPASSWORD } from '@/types/interfaces';
 import axios from 'axios';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -55,4 +55,7 @@ export const passwordReset = async (body: PASSWORDRESET) => {
 };
 export const updatePassword = async (body: UPDATEPASSWORD) => {
   return postService('/dev/update-password', body);
+};
+export const editUser = async (body: EDITUSER) => {
+  return putService('/dev/editDeveloper', body);
 };
