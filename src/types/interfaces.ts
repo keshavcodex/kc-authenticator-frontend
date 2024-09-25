@@ -25,3 +25,12 @@ export interface OTP {
   referenceId: string;
   otp: string;
 }
+
+export interface PASSWORDRESET {
+  email: string;
+  frontendUrl: string;
+}
+export interface UPDATEPASSWORD {
+  token: string;
+  password: string;
+}

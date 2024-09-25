@@ -62,3 +62,22 @@ export const signUpValidator = (data: {
 
 	return { isValid, errors };
 };
+
+export const passwordValidator = (data: {
+	[key: string]: string;
+}): ValidationResult => {
+	const errors: string[] = [];
+	let isValid = true;
+
+	// Password validation
+	if (data.password.length < 6) {
+		isValid = false;
+		errors.push('Password must be at least 6 characters long.');
+	} else if (data.password != data.cnfPassword){
+		isValid = false;
+		errors.push('Password and confirm password is not same');
+	}
+
+	return { isValid, errors };
+};
+

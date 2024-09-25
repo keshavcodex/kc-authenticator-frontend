@@ -1,38 +1,55 @@
 'use client';
-import { signupValidation } from '@/api/apiService';
+import { otpValidation, resendOtp } from '@/api/apiService';
 import theme from '@/components/theme';
 import { setUserInfo } from '@/store/store';
 import { RESPONSE } from '@/types/interfaces';
+import { sleep } from '@/util/helper';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Box, Button, Card, CardContent, CircularProgress, Link, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function Register() {
+export default function ValidateRegistration() {
   const dispatch = useDispatch();
-
   const router = useRouter();
   const [otp, setOtp] = useState('');
   const [error, setError] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [counter, setCounter] = useState(60); // 60 seconds countdown
+  const [isWaiting, setIsWaiting] = useState(true);
   const referenceId = localStorage.getItem('referenceId') || '';
-
-  const handleSignupValidation = async () => {
+  
+  useEffect(() => {
+    let timer: any;
+    if (isWaiting && counter > 0) {
+      timer = setInterval(() => {
+        setCounter((prevCounter) => prevCounter - 1);
+      }, 1000);
+    }
+    
+    if (counter === 0) {
+      setIsWaiting(false);
+      clearInterval(timer);
+    }
+    
+    return () => clearInterval(timer);
+  }, [isWaiting, counter]);
+  
+  const handleOtpValidation = async () => {
     try {
       setIsLoading(true);
       const body = {
         referenceId,
         otp,
       };
-      const response: RESPONSE = await signupValidation(body);
+      const response: RESPONSE = await otpValidation(body);
       console.log(response);
       if (response?.isSuccess) {
         dispatch(setUserInfo(response.developer));
-        localStorage.setItem('referenceId', response?.developer?.id);
         setError([]);
         router.replace('/');
-      }else {
+      } else {
         setError([response.message]);
       }
       setIsLoading(false);
@@ -41,11 +58,38 @@ export default function Register() {
       console.log(error);
     }
   };
+  
+  const handleResendOtp = async () => {
+    try {
+      setIsLoading(true);
+      console.log('Resending OTP...');
+      
+      // Start countdown
+      setCounter(60);
+      setIsWaiting(true);
+      sleep(15);
+      console.log("referenceId", referenceId);
+      const response: RESPONSE = await resendOtp(referenceId);
+      console.log(response);
+      if (response?.isSuccess) {
+        dispatch(setUserInfo(response.developer));
+        setError([]);
+        router.replace('/');
+      } else {
+        setError([response.message]);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
+
   return (
     <Box>
       <Typography variant="h4" sx={{ textAlign: 'center' }}></Typography>
       <Box display="flex" justifyContent="center" mt={4}>
-        <Card sx={{ maxWidth: 300, boxShadow: 3, pb: 5 }}>
+        <Card sx={{ maxWidth: 300, boxShadow: 3 }}>
           <CardContent>
             <Typography variant="h5" sx={{ textAlign: 'center' }}>
               OTP sent on your email
@@ -74,6 +118,19 @@ export default function Register() {
                     <Typography sx={{ pl: 0.5, mb: 1 }}>{message}</Typography>
                   </Box>
                 ))}
+              <Typography
+                onClick={isWaiting ? undefined : handleResendOtp}
+                sx={{
+                  mt: 1,
+                  textAlign: 'center',
+                  color: theme.palette.primary.main,
+                  cursor: isWaiting ? 'default' : 'pointer',
+                  textDecoration: isWaiting ? 'none' : 'underline',
+                }}
+                variant="body2"
+              >
+                {isWaiting ? `Resend OTP in ${counter}s` : 'Resend OTP'}
+              </Typography>
               {isLoading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
                   <CircularProgress size={30} variant="indeterminate" />
@@ -82,25 +139,16 @@ export default function Register() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleSignupValidation}
+                  onClick={handleOtpValidation}
                   fullWidth
                   size="small"
-                  sx={{ mt: 1 }}
+                  sx={{ mt: 2 }}
                 >
                   Confirm
                 </Button>
               )}
             </Box>
           </CardContent>
-          <Box textAlign="center">
-            <Typography
-              onClick={() => router.push('/auth')}
-              sx={{ textDecoration: 'underline', color: theme.palette.primary.main }}
-              variant="body2"
-            >
-              Already have an account? Login
-            </Typography>
-          </Box>
         </Card>
       </Box>
     </Box>

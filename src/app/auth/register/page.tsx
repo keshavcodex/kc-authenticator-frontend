@@ -4,7 +4,7 @@ import theme from '@/components/theme';
 import { setUserInfo } from '@/store/store';
 import { RESPONSE } from '@/types/interfaces';
 import { signUpValidator } from '@/util/validator';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'; 
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import {
   Box,
   Button,
@@ -27,7 +27,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function Register() {
-  const dispatch = useDispatch();
   const router = useRouter();
   const path = usePathname();
 
@@ -44,12 +43,12 @@ export default function Register() {
   const handleRegister = async () => {
     try {
       const body = {
-        firstName,
-        lastName,
-        phone,
-        devEmail: email,
-        password,
-        cnfPassword,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        phone: phone.trim(),
+        devEmail: email.trim().toLowerCase(),
+        password: password,
+        cnfPassword: cnfPassword,
       };
       const validation = signUpValidator(body);
       if (!validation.isValid) {
@@ -62,7 +61,6 @@ export default function Register() {
       const response: RESPONSE = await register(body);
       console.log(response);
       if (response?.isSuccess) {
-        dispatch(setUserInfo(response.developer));
         localStorage.setItem('referenceId', response?.developer?.id);
         setError([]);
         router.push(path + '/validate');
@@ -127,7 +125,7 @@ export default function Register() {
                 <OutlinedInput
                   label="Password"
                   id="outlined-adornment-password"
-                  size='small'
+                  size="small"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -177,7 +175,7 @@ export default function Register() {
                       justifyContent: 'start',
                     }}
                   >
-                    {/* <InfoOutlinedIcon /> */}
+                    <InfoOutlinedIcon fontSize="small" />
                     <Typography sx={{ pl: 0.5, mb: 1 }}>{message}</Typography>
                   </Box>
                 ))}

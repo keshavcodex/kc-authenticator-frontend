@@ -7,8 +7,10 @@ import theme from './theme';
 import { Provider } from 'react-redux';
 import store, { persistor } from '@/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { useEffect, useState } from 'react';
 
 export default function Main({ children }: { children: any }) {
+
   const gradientAnimation = useSpring({
     from: { backgroundPosition: '0% 50%' },
     to: { backgroundPosition: '100% 50%' },
