@@ -1,20 +1,145 @@
 'use client';
-import { setUserInfo } from '@/store/store';
-import { Box } from '@mui/material';
-import { redirect } from 'next/navigation';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, Typography, Container, useMediaQuery } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import heroBg from '../../public/images/herobg.jpg';
+import Footer from '@/components/Footer';
+import theme from '@/components/theme';
+import UpwardMotion from '@/components/effects.tsx/UpwardMotion';
+import ScaleUpMotion from '@/components/effects.tsx/ScaleUpMotion';
+import HoverMotion from '@/components/effects.tsx/HoverMotion';
 
 export default function Page() {
+  const router = useRouter();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box>
-      <Box>Hello1</Box>
-      <Box>Hello2</Box>
-      <Box>Hello3</Box>
-      <Box>Hello4</Box>
-      <Box>Hello5</Box>
-      <Box>Hello6</Box>
+      <Box
+        sx={{
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          minHeight: '90vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: theme.palette.primary.contrastText,
+          textAlign: 'center',
+          position: 'relative',
+        }}
+      >
+        <Box sx={{ paddingX: '2rem', borderRadius: '12px' }}>
+          <UpwardMotion>
+            <Typography
+              variant={isSmallScreen ? 'h3' : 'h2'}
+              sx={{
+                fontWeight: 'bold',
+                mb: 2,
+                textShadow: `
+                2px 2px 4px rgba(0, 0, 0, 0.7),   /* Main shadow */
+                4px 4px 8px rgba(0, 0, 0, 0.5),   /* Second layer for a more pronounced effect */
+                6px 6px 12px rgba(0, 0, 0, 0.3)   /* Third layer for depth */
+              `,
+              }}
+            >
+              Secure Authentication Made Simple
+            </Typography>
+          </UpwardMotion>
+          <ScaleUpMotion>
+            <Typography
+              variant="h5"
+              sx={{
+                mb: 4,
+                textShadow: `
+                2px 2px 4px rgba(0, 0, 0, 0.2),   /* Main shadow */
+                4px 4px 8px rgba(0, 0, 0, 0.5),   /* Second layer for a more pronounced effect */
+                6px 6px 12px rgba(0, 0, 0, 0.3)   /* Third layer for depth */
+              `,
+              }}
+            >
+              Empower your applications with robust authentication solutions for developers and users.
+            </Typography>
+          </ScaleUpMotion>
+          <Button variant="contained" size="large" color="secondary" sx={{ bgcolor: '#fff', borderRadius: 50 }} onClick={() => router.push('/auth')}>
+            Get Started
+          </Button>
+        </Box>
+      </Box>
+
+      {/* Features Section */}
+      <Container sx={{ py: 6 }}>
+        <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4, color: theme.palette.primary.contrastText }}>
+          Why Choose KC Authenticator?
+        </Typography>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 4,
+            textAlign: 'center',
+          }}
+        >
+          {/* Feature 1 */}
+          <HoverMotion>
+            <Box
+              sx={{
+                backgroundColor: '#f1f1f1',
+                padding: '2rem',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                flex: 1,
+              }}
+            >
+              {/* <img src="/images/feature-1.svg" alt="Feature 1" style={{ height: 100, marginBottom: '1.5rem' }} /> */}
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+                Secure & Reliable
+              </Typography>
+              <Typography>Best-in-class encryption to keep your data safe.</Typography>
+            </Box>
+          </HoverMotion>
+
+          {/* Feature 2 */}
+          <HoverMotion>
+            <Box
+              sx={{
+                backgroundColor: '#f1f1f1',
+                padding: '2rem',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                flex: 1,
+              }}
+            >
+              {/* <img src="/images/feature-2.svg" alt="Feature 2" style={{ height: 100, marginBottom: '1.5rem' }} /> */}
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+                Easy Integration
+              </Typography>
+              <Typography>Quickly integrate our API into your applications.</Typography>
+            </Box>
+          </HoverMotion>
+          <HoverMotion>
+            {/* Feature 3 */}
+            <Box
+              sx={{
+                backgroundColor: '#f1f1f1',
+                padding: '2rem',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                flex: 1,
+              }}
+            >
+              {/* <img src="/images/feature-3.svg" alt="Feature 3" style={{ height: 100, marginBottom: '1.5rem' }} /> */}
+              <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+                Multi-Platform Support
+              </Typography>
+              <Typography>Works seamlessly across web and mobile platforms.</Typography>
+            </Box>
+          </HoverMotion>
+        </Box>
+      </Container>
+
+      {/* Footer */}
+      <Footer />
     </Box>
   );
 }

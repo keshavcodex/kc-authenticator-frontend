@@ -12,7 +12,7 @@ const theme = createTheme({
 		secondary: {
 			main: '#e0f2f1', // 50
 			light: '#b2dfdb', // 100
-			dark: '#004d40', // 900
+			dark: '#b2dfdb', // 900
 			contrastText: '#000000' // Adjust for better readability
 		}
 	},

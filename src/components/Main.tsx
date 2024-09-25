@@ -7,18 +7,17 @@ import theme from './theme';
 import { Provider } from 'react-redux';
 import store, { persistor } from '@/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import { useEffect, useState } from 'react';
+import heroBg from '../../public/images/herobg.jpg'
 
 export default function Main({ children }: { children: any }) {
-
   const gradientAnimation = useSpring({
     from: { backgroundPosition: '0% 50%' },
     to: { backgroundPosition: '100% 50%' },
-    config: { duration: 2500 },
+    config: { duration: 25000 },
     loop: { reverse: true },
   });
 
-  const gradientBackground = `linear-gradient(to bottom right, ${theme.palette.primary.main}, ${theme.palette.primary.light}, ${theme.palette.secondary.dark})`;
+  const gradientBackground = `linear-gradient(to bottom right,${theme.palette.primary.light}, ${theme.palette.primary.dark})`;
 
   return (
     <Provider store={store}>
@@ -28,7 +27,8 @@ export default function Main({ children }: { children: any }) {
           <animated.div
             style={{
               ...gradientAnimation,
-              backgroundImage: gradientBackground,
+              // backgroundImage: gradientBackground,
+              backgroundImage: `url(${heroBg.src})`,
               backgroundSize: '100% 400%',
               display: 'flex',
               flexDirection: 'column',
