@@ -6,6 +6,10 @@ import theme from '@/components/theme';
 import UpwardMotion from '@/components/effects.tsx/UpwardMotion';
 import ScaleUpMotion from '@/components/effects.tsx/ScaleUpMotion';
 import HoverMotion from '@/components/effects.tsx/HoverMotion';
+import kcIcon from '@/../public/images/kc-con-white.png';
+import Image from 'next/image';
+import Player from 'lottie-react';
+import animationData from '@/../public/videos/shield-animation.json';
 
 export default function Page() {
   const router = useRouter();
@@ -24,7 +28,23 @@ export default function Page() {
           position: 'relative',
         }}
       >
-        <Box sx={{ paddingX: '2rem', borderRadius: '12px', pb: 15 }}>
+        <Box sx={{ borderRadius: '12px', pb: 15 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Player
+              autoplay
+              loop
+              animationData={animationData}
+              style={{
+                height: '300px',
+                width: '300px',
+              }}
+            />
+          </Box>
           <UpwardMotion>
             <Typography
               variant={smScreen ? 'h3' : 'h2'}
@@ -59,7 +79,13 @@ export default function Page() {
               Empower your applications with robust authentication solutions for developers and users.
             </Typography>
           </ScaleUpMotion>
-          <Button variant="contained" size="large" color="secondary" sx={{ bgcolor: '#fff', borderRadius: 50 }} onClick={() => router.push('/dashboard')}>
+          <Button
+            variant="contained"
+            size="large"
+            color="secondary"
+            sx={{ bgcolor: '#fff', borderRadius: 50 }}
+            onClick={() => router.push('/dashboard')}
+          >
             Get Started
           </Button>
         </Box>
@@ -67,7 +93,10 @@ export default function Page() {
 
       {/* Features Section */}
       <Container sx={{ py: 6 }}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4, color: theme.palette.primary.contrastText }}>
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4, color: theme.palette.primary.contrastText }}
+        >
           Why Choose KC Authenticator?
         </Typography>
 

@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/store/store';
 import { redirect, usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import kcIcon from '@/../public/images/kc-con-white.png'; // Importing the image
 
 export default function Navbar() {
   const theme = useTheme();
@@ -74,7 +76,7 @@ export default function Navbar() {
                     sx={{ cursor: 'pointer' }}
                   >
                     <DashboardIcon sx={{ px: 1 }} />
-                    <ListItemText primary="Home" />
+                    <ListItemText primary="Dashboard" />
                   </ListItem>
                   <ListItem
                     onClick={() => {
@@ -97,9 +99,12 @@ export default function Navbar() {
                 </IconButton>
               ) : (
                 <>
-                  <Link href="/" style={{ textDecoration: 'none', color: theme.palette.primary.contrastText }}>
+                  <Link href="/" style={{ textDecoration: 'none', color: theme.palette.primary.contrastText, paddingRight: 20 }}>
+                    <Image src={kcIcon} alt="KC Icon" width={40} height={40} />
+                  </Link>
+                  <Link href="/dashboard" style={{ textDecoration: 'none', color: theme.palette.primary.contrastText }}>
                     <Typography sx={{ textDecorationLine: 'none' }} variant="h6">
-                      Home
+                      Dashboard
                     </Typography>
                   </Link>
                   <Link href="/docs" style={{ textDecoration: 'none', flex: 110, color: theme.palette.primary.contrastText }}>
