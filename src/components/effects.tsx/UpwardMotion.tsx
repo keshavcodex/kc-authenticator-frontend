@@ -1,11 +1,11 @@
 import { duration } from '@mui/material';
-import { motion } from 'framer-motion';
+import { delay, motion } from 'framer-motion';
 
 export default function UpwardMotion({ children }: any) {
   const variants = {
     hidden: {
       opacity: 0,
-      y: 70,
+      y: 90,
     },
     visible: {
       opacity: 1,
@@ -13,8 +13,9 @@ export default function UpwardMotion({ children }: any) {
       transition: {
         type: 'spring',
         stiffness: 60,
-        damping: 6,
+        damping: 4,
         duration: 1,
+        delay: 0.5
       },
     },
   };

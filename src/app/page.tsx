@@ -1,7 +1,6 @@
 'use client';
 import { Box, Button, Typography, Container, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import heroBg from '../../public/images/herobg.jpg';
 import Footer from '@/components/Footer';
 import theme from '@/components/theme';
 import UpwardMotion from '@/components/effects.tsx/UpwardMotion';
@@ -10,14 +9,12 @@ import HoverMotion from '@/components/effects.tsx/HoverMotion';
 
 export default function Page() {
   const router = useRouter();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const smScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box>
       <Box
         sx={{
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
           minHeight: '90vh',
           display: 'flex',
           justifyContent: 'center',
@@ -27,39 +24,42 @@ export default function Page() {
           position: 'relative',
         }}
       >
-        <Box sx={{ paddingX: '2rem', borderRadius: '12px' }}>
+        <Box sx={{ paddingX: '2rem', borderRadius: '12px', pb: 15 }}>
           <UpwardMotion>
             <Typography
-              variant={isSmallScreen ? 'h3' : 'h2'}
+              variant={smScreen ? 'h3' : 'h2'}
               sx={{
                 fontWeight: 'bold',
                 mb: 2,
                 textShadow: `
-                2px 2px 4px rgba(0, 0, 0, 0.7),   /* Main shadow */
-                4px 4px 8px rgba(0, 0, 0, 0.5),   /* Second layer for a more pronounced effect */
-                6px 6px 12px rgba(0, 0, 0, 0.3)   /* Third layer for depth */
-              `,
+                  5px 10px 15px rgba(0, 0, 0, 0.8), 
+                  0 0 20px rgba(5, 4, 35, 0.8),   
+                  0 0 30px rgba(255, 255, 255, 0.4),   
+                  0 0 40px rgba(5, 4, 35, 0.5)   
+                `,
               }}
             >
               Secure Authentication Made Simple
             </Typography>
           </UpwardMotion>
+
           <ScaleUpMotion>
             <Typography
-              variant="h5"
               sx={{
                 mb: 4,
+                fontSize: 23,
+                fontWeight: '200',
                 textShadow: `
-                2px 2px 4px rgba(0, 0, 0, 0.2),   /* Main shadow */
-                4px 4px 8px rgba(0, 0, 0, 0.5),   /* Second layer for a more pronounced effect */
-                6px 6px 12px rgba(0, 0, 0, 0.3)   /* Third layer for depth */
+                2px 2px 4px rgba(0, 0, 0, 0.2),   
+                4px 4px 8px rgba(0, 0, 0, 0.5),  
+                6px 6px 12px rgba(0, 0, 0, 0.3) 
               `,
               }}
             >
               Empower your applications with robust authentication solutions for developers and users.
             </Typography>
           </ScaleUpMotion>
-          <Button variant="contained" size="large" color="secondary" sx={{ bgcolor: '#fff', borderRadius: 50 }} onClick={() => router.push('/auth')}>
+          <Button variant="contained" size="large" color="secondary" sx={{ bgcolor: '#fff', borderRadius: 50 }} onClick={() => router.push('/dashboard')}>
             Get Started
           </Button>
         </Box>

@@ -9,8 +9,7 @@ export default function Footer() {
       sx={{
         backgroundColor: '#333333', // Dark grey color
         color: '#FFFFFF',
-        py: 5, // increased padding on top and bottom
-        px: 3, // increased padding on left and right
+        p: 3,
         mt: 'auto', // margin on top
         textAlign: 'center',
       }}
@@ -30,7 +29,6 @@ export default function Footer() {
           Contact Us
         </Link>
       </Box>
-
     </Box>
   );
 }

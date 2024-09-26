@@ -2,22 +2,33 @@
 
 import { animated, useSpring } from '@react-spring/web';
 import Navbar from '@/components/Navbar';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, useMediaQuery } from '@mui/material';
 import theme from './theme';
 import { Provider } from 'react-redux';
 import store, { persistor } from '@/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import heroBg from '../../public/images/herobg.jpg';
+// import heroBg from '../../public/images/heroBg1.jpg';
+import heroBg from '../../public/images/heroBg2.jpg';
+// import heroBg from '../../public/images/heroBg3.jpg';
 
 export default function Main({ children }: any) {
-  const gradientAnimation = useSpring({
-    from: { backgroundPosition: '0% 50%' },
-    to: { backgroundPosition: '100% 50%' },
-    config: { duration: 25000 },
-    loop: { reverse: true },
-  });
+  const smScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // const gradientBackground = `linear-gradient(to bottom right,${theme.palette.primary.light}, ${theme.palette.primary.dark})`;
+  const gradientAnimation = useSpring(
+    smScreen
+      ? {
+          to: { backgroundPosition: '0% 50%' },
+          from: { backgroundPosition: '50% 100%' },
+          config: { duration: 60000 },
+          loop: { reverse: true },
+        }
+      : {
+          to: { backgroundPosition: '50% 0%' },
+          from: { backgroundPosition: '0% 100%' },
+          config: { duration: 60000 },
+          loop: { reverse: true },
+        }
+  );
 
   return (
     <Provider store={store}>
@@ -27,9 +38,8 @@ export default function Main({ children }: any) {
           <animated.div
             style={{
               ...gradientAnimation,
-              // backgroundImage: gradientBackground,
               backgroundImage: `url(${heroBg.src})`,
-              backgroundSize: '100% 400%',
+              backgroundSize: smScreen? '': '100% 400%',
               display: 'flex',
               flexDirection: 'column',
               minHeight: '100vh',
