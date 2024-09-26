@@ -1,11 +1,5 @@
-import React from 'react'
+'use client';
 
 export default function Docs() {
-  return (
-    <div>Dod
-     dddddd
-      csdddfd
-d
-    </div>
-  )
+  return <div>Dod ddddddd csdddddfd d</div>;
 }

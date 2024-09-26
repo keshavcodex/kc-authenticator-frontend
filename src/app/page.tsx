@@ -6,8 +6,6 @@ import theme from '@/components/theme';
 import UpwardMotion from '@/components/effects.tsx/UpwardMotion';
 import ScaleUpMotion from '@/components/effects.tsx/ScaleUpMotion';
 import HoverMotion from '@/components/effects.tsx/HoverMotion';
-import kcIcon from '@/../public/images/kc-con-white.png';
-import Image from 'next/image';
 import Player from 'lottie-react';
 import animationData from '@/../public/videos/shield-animation.json';
 
@@ -29,7 +27,7 @@ export default function Page() {
         }}
       >
         <Box sx={{ borderRadius: '12px', pb: 15 }}>
-          <Box
+          {/* <Box
             sx={{
               display: 'flex',
               justifyContent: 'center',
@@ -38,13 +36,14 @@ export default function Page() {
             <Player
               autoplay
               loop
+              src={'/public/videos/shield-animation.json'}
               animationData={animationData}
               style={{
                 height: '300px',
                 width: '300px',
               }}
             />
-          </Box>
+          </Box> */}
           <UpwardMotion>
             <Typography
               variant={smScreen ? 'h3' : 'h2'}
@@ -120,7 +119,6 @@ export default function Page() {
                 flex: 1,
               }}
             >
-              {/* <img src="/images/feature-1.svg" alt="Feature 1" style={{ height: 100, marginBottom: '1.5rem' }} /> */}
               <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
                 Secure & Reliable
               </Typography>
