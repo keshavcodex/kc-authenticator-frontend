@@ -39,3 +39,7 @@ export interface UPDATEPASSWORD {
   token: string;
   password: string;
 }
+
+export interface APPDATA{
+  appName: string;
+}

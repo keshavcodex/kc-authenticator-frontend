@@ -7,14 +7,14 @@ const theme = createTheme({
 			main: '#009688', // Primary color
 			light: '#4db6ac', // 300
 			dark: '#00796b', // 700
-			contrastText: '#ffffff' // Adjust for better readability
+			contrastText: '#ffffff', // Adjust for better readability
 		},
 		secondary: {
 			main: '#e0f2f1', // 50
 			light: '#b2dfdb', // 100
 			dark: '#b2dfdb', // 900
 			contrastText: '#000000' // Adjust for better readability
-		}
+		},
 	},
 	typography: {
 		fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'

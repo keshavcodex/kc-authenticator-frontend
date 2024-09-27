@@ -36,7 +36,6 @@ export default function Login() {
       setIsLoading(false);
       if (response?.isSuccess) {
         dispatch(setUserInfo(response.developer));
-        localStorage.setItem('userInfo', JSON.stringify(response.developer));
         setError([]);
         router.replace('/');
       } else {

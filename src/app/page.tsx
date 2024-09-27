@@ -1,4 +1,5 @@
 'use client';
+
 import { Box, Button, Typography, Container, useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/Footer';
@@ -6,8 +7,7 @@ import theme from '@/components/theme';
 import UpwardMotion from '@/components/effects.tsx/UpwardMotion';
 import ScaleUpMotion from '@/components/effects.tsx/ScaleUpMotion';
 import HoverMotion from '@/components/effects.tsx/HoverMotion';
-import Player from 'lottie-react';
-import animationData from '@/../public/videos/shield-animation.json';
+import MainAnimation from '@/components/MainAnimation';
 
 export default function Page() {
   const router = useRouter();
@@ -27,24 +27,8 @@ export default function Page() {
         }}
       >
         <Box sx={{ borderRadius: '12px', pb: 15 }}>
-          {/* <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <Player
-              autoplay
-              loop
-              src={'/public/videos/shield-animation.json'}
-              animationData={animationData}
-              style={{
-                height: '300px',
-                width: '300px',
-              }}
-            />
-          </Box> */}
           <UpwardMotion>
+            <MainAnimation />
             <Typography
               variant={smScreen ? 'h3' : 'h2'}
               sx={{
@@ -66,7 +50,8 @@ export default function Page() {
             <Typography
               sx={{
                 mb: 4,
-                fontSize: 23,
+                px: smScreen ? 5 : 2,
+                fontSize: smScreen ? 18 : 23,
                 fontWeight: '200',
                 textShadow: `
                 2px 2px 4px rgba(0, 0, 0, 0.2),   
@@ -92,10 +77,7 @@ export default function Page() {
 
       {/* Features Section */}
       <Container sx={{ py: 6 }}>
-        <Typography
-          variant="h4"
-          sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4, color: theme.palette.primary.contrastText }}
-        >
+        <Typography variant="h4" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 4, color: theme.palette.primary.contrastText }}>
           Why Choose KC Authenticator?
         </Typography>
 

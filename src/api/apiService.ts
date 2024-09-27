@@ -3,14 +3,14 @@ import axios from 'axios';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-// const getService = async (route: string) => {
-//   try {
-//     const response = await axios.get(`${baseUrl}${route}`);
-//     return response?.data;
-//   } catch (error) {
-//     console.log(JSON.stringify(error, null, 2));
-//   }
-// };
+const getService = async (route: string) => {
+  try {
+    const response = await axios.get(`${baseUrl}${route}`);
+    return response?.data;
+  } catch (error) {
+    console.log(JSON.stringify(error, null, 2));
+  }
+};
 export const postService: any = async (route: string, body?: any) => {
   try {
     const response = await axios.post(`${baseUrl}${route}`, body);
@@ -58,4 +58,10 @@ export const updatePassword = async (body: UPDATEPASSWORD) => {
 };
 export const editUser = async (body: EDITUSER) => {
   return putService('/dev/editDeveloper', body);
+};
+export const getApps = async (id: string) => {
+  return getService(`/app/getAllAppsByDevId?devId=${id}`);
+};
+export const getAllApps = async () => {
+  return getService('/app/getAllApps');
 };
