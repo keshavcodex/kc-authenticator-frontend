@@ -1,5 +1,18 @@
 'use client';
-import { Box, Button, Card, CardContent, CircularProgress, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CircularProgress,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+  Typography,
+} from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useEffect, useState } from 'react';
 import { RESPONSE } from '@/types/interfaces';
@@ -8,8 +21,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginValidator } from '@/util/validator';
 import { setUserInfo } from '@/store/store';
 import theme from '@/components/theme';
-import { redirect, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -19,6 +34,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string[]>([]);
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
@@ -46,6 +62,11 @@ export default function Login() {
       console.log(error);
     }
   };
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleLogin();
+    }
+  };
   return (
     <Box>
       <Typography variant="h4" sx={{ textAlign: 'center' }}></Typography>
@@ -61,21 +82,29 @@ export default function Login() {
                 label="Email"
                 variant="outlined"
                 fullWidth
-                size="small"
                 margin="dense"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDownCapture={handleKeyDown}
               />
-              <TextField
-                label="Password"
-                variant="outlined"
-                type="password"
-                fullWidth
-                size="small"
-                margin="normal"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <FormControl sx={{ mt: 1, width: '100%' }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
+                  label="Password"
+                  id="outlined-adornment-password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDownCapture={handleKeyDown}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton aria-label="toggle password visibility" onClick={() => setShowPassword(!showPassword)} edge="end">
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
               {error.length > 0 &&
                 error.map((message, index) => (
                   <Box

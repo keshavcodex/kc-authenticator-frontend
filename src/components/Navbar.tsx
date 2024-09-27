@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AndroidIcon from '@mui/icons-material/Android';
+import GroupsIcon from '@mui/icons-material/Groups';
 import MenuItem from '@mui/material/MenuItem';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -40,7 +42,7 @@ export default function Navbar() {
   };
 
   const handleClose = () => {
-    router.push('/user');
+    router.push('/profile');
     setAnchorEl(null);
   };
   const handleLogout = () => {
@@ -70,7 +72,7 @@ export default function Navbar() {
                 <List>
                   <ListItem
                     onClick={() => {
-                      router.push('/');
+                      router.push('/dashboard');
                       setDrawerOpen(false);
                     }}
                     sx={{ cursor: 'pointer' }}
@@ -87,6 +89,26 @@ export default function Navbar() {
                   >
                     <ArticleIcon sx={{ px: 1 }} />
                     <ListItemText primary="Docs" />
+                  </ListItem>
+                  <ListItem
+                    onClick={() => {
+                      router.push('/app');
+                      setDrawerOpen(false);
+                    }}
+                    sx={{ cursor: 'pointer' }}
+                  >
+                    <AndroidIcon sx={{ px: 1 }} />
+                    <ListItemText primary="Apps" />
+                  </ListItem>
+                  <ListItem
+                    onClick={() => {
+                      router.push('/user');
+                      setDrawerOpen(false);
+                    }}
+                    sx={{ cursor: 'pointer' }}
+                  >
+                    <GroupsIcon sx={{ px: 1 }} />
+                    <ListItemText primary="Users" />
                   </ListItem>
                 </List>
               </Drawer>
@@ -107,9 +129,14 @@ export default function Navbar() {
                       Dashboard
                     </Typography>
                   </Link>
-                  <Link href="/docs" style={{ textDecoration: 'none', flex: 110, color: theme.palette.primary.contrastText }}>
+                  <Link href="/docs" style={{ textDecoration: 'none', color: theme.palette.primary.contrastText }}>
                     <Typography sx={{ textDecorationLine: 'none', pl: 3 }} variant="h6">
                       Docs
+                    </Typography>
+                  </Link>
+                  <Link href="/application" style={{ textDecoration: 'none', flex: 110, color: theme.palette.primary.contrastText }}>
+                    <Typography sx={{ textDecorationLine: 'none', pl: 3 }} variant="h6">
+                      Apps
                     </Typography>
                   </Link>
                 </>
@@ -119,7 +146,14 @@ export default function Navbar() {
 
           {isAuthenticated ? (
             <Box sx={{ display: 'flex', flex: 1, justifyContent: 'flex-end' }}>
-              <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
                 <AccountCircle />
               </IconButton>
               <Menu

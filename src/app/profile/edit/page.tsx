@@ -18,6 +18,7 @@ export default function Register() {
   const dispatch = useDispatch();
 
   const user: USER = useSelector((state: any) => state.user.userInfo);
+  if (user === null) redirect('/auth');
 
   const [firstName, setFirstName] = useState(user.firstName || '');
   const [lastName, setLastName] = useState(user.lastName || '');

@@ -7,7 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { usePathname, useRouter } from 'next/navigation';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,9 +32,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function StickyHeadTable({ columns, data }: any) {
+export default function StickyHeadTable({ columns, data, handleEdit, handleDelete }: any) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const router = useRouter();
+  const path = usePathname();
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -44,13 +50,14 @@ export default function StickyHeadTable({ columns, data }: any) {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {Object.keys(columns ? columns : data[0]).map((column, index) => (
                 <StyledTableCell key={index}>{columns ? columns[column] : column}</StyledTableCell>
               ))}
+              <StyledTableCell align="center">Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -68,11 +75,17 @@ export default function StickyHeadTable({ columns, data }: any) {
                 </TableRow>
               );
             })} */}
-            {data.map((row: any) => (
+            {data.map((row: any, index: number) => (
               <StyledTableRow key={row.id}>
-                {Object.keys(columns ? columns : row).map((cell, index) => (
-                  <StyledTableCell key={index}>{row[cell]}</StyledTableCell>
+                {Object.keys(columns ? columns : row).map((cell, jIndex) => (
+                  <StyledTableCell key={jIndex}>{row[cell]}</StyledTableCell>
                 ))}
+                <StyledTableCell key={index} style={{ minWidth: 60 }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-around', cursor: 'pointer' }}>
+                    <BorderColorIcon color="primary" onClick={() => handleEdit(row.id)} />
+                    <DeleteIcon color="error" onClick={() => handleDelete(row.id)} />
+                  </Box>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

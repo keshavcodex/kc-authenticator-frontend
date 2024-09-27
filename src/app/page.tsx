@@ -8,10 +8,12 @@ import UpwardMotion from '@/components/effects.tsx/UpwardMotion';
 import ScaleUpMotion from '@/components/effects.tsx/ScaleUpMotion';
 import HoverMotion from '@/components/effects.tsx/HoverMotion';
 import MainAnimation from '@/components/MainAnimation';
+import { useSelector } from 'react-redux';
 
 export default function Page() {
   const router = useRouter();
   const smScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isAuthenticated = useSelector((state: any) => state.user.isAuthenticated);
 
   return (
     <Box>
@@ -68,7 +70,7 @@ export default function Page() {
             size="large"
             color="secondary"
             sx={{ bgcolor: '#fff', borderRadius: 50 }}
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push(isAuthenticated ? '/dashboard' : '/docs')}
           >
             Get Started
           </Button>

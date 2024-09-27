@@ -1,4 +1,4 @@
-import { EDITUSER, LOGIN, OTP, PASSWORDRESET, UPDATEPASSWORD } from '@/types/interfaces';
+import { CREATEAPP, EDITAPP, EDITUSER, LOGIN, OTP, PASSWORDRESET, UPDATEPASSWORD } from '@/types/interfaces';
 import axios from 'axios';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -11,7 +11,8 @@ const getService = async (route: string) => {
     console.log(JSON.stringify(error, null, 2));
   }
 };
-export const postService: any = async (route: string, body?: any) => {
+
+export const postService = async (route: string, body?: any) => {
   try {
     const response = await axios.post(`${baseUrl}${route}`, body);
     return response?.data;
@@ -29,7 +30,7 @@ export const putService = async (route: string, body: any) => {
   }
 };
 
-export const deleteService = async (route: string, body: any) => {
+export const deleteService = async (route: string, body?: any) => {
   try {
     const response = await axios.delete(`${baseUrl}${route}`, body);
     return response?.data;
@@ -64,4 +65,23 @@ export const getApps = async (id: string) => {
 };
 export const getAllApps = async () => {
   return getService('/app/getAllApps');
+};
+
+export const createApp = async (body: CREATEAPP) => {
+  return postService('/app/createApp', body);
+};
+
+export const editApp = async (body: EDITAPP) => {
+  return putService('/app/editApp', body);
+};
+
+export const checkAppName = async (devId: string, appName: string) => {
+  return getService(`/app/getAppByDevIdAndAppName?appName=${appName}&devId=${devId}`);
+};
+
+export const getApp = async (id: string) => {
+  return getService(`/app/getApp?id=${id}`);
+};
+export const deleteApp = async (id: string) => {
+  return deleteService(`/app/deleteApp?id=${id}`);
 };

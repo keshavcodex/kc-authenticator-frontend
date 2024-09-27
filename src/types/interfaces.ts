@@ -40,6 +40,25 @@ export interface UPDATEPASSWORD {
   password: string;
 }
 
-export interface APPDATA{
+export interface APPDATA {
+  id: string;
+  devId: string;
+  createdAt: string;
+  updatedAt: string;
+  userCount: number;
   appName: string;
+}
+export interface CREATEAPP {
+  devId: string;
+  appName: string;
+}
+export interface EDITAPP {
+  id: string;
+  appName: string;
+}
+
+export interface APPRESPONSE {
+  clientApp: APPDATA;
+  isSuccess: boolean;
+  message: string;
 }

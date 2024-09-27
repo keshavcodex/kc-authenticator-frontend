@@ -73,6 +73,11 @@ export default function Register() {
       console.log(error);
     }
   };
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleRegister();
+    }
+  };
   return (
     <Box>
       <Typography variant="h4" sx={{ textAlign: 'center' }}></Typography>
@@ -92,6 +97,7 @@ export default function Register() {
                 size="small"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                onKeyDownCapture={handleKeyDown}
               />
               <TextField
                 label="Last Name"
@@ -101,6 +107,7 @@ export default function Register() {
                 size="small"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+                onKeyDownCapture={handleKeyDown}
               />
               <TextField
                 label="Phone"
@@ -110,6 +117,7 @@ export default function Register() {
                 size="small"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                onKeyDownCapture={handleKeyDown}
               />
               <TextField
                 label="Email"
@@ -119,6 +127,7 @@ export default function Register() {
                 size="small"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDownCapture={handleKeyDown}
               />
               <FormControl sx={{ mt: 1, width: '100%' }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -129,6 +138,7 @@ export default function Register() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDownCapture={handleKeyDown}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -152,6 +162,7 @@ export default function Register() {
                   type={showPassword ? 'text' : 'password'}
                   value={cnfPassword}
                   onChange={(e) => setCnfPassword(e.target.value)}
+                  onKeyDownCapture={handleKeyDown}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton

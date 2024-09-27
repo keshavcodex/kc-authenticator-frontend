@@ -7,12 +7,13 @@ import { useSelector } from 'react-redux';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import EditIcon from '@mui/icons-material/Edit';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-export default function User() {
+export default function user() {
   const Path = usePathname();
-  const User: USER = useSelector((state: any) => state.user.userInfo);
+  const user: USER = useSelector((state: any) => state.user.userInfo);
+  if (user === null) redirect('/auth');
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 5 }}>
@@ -30,20 +31,20 @@ export default function User() {
         }}
       >
         {/* <Avatar
-          src={User.profilePicture} // Assuming User.profilePicture is a URL to the image
-          alt={`${User.firstName} ${User.lastName}`}
+          src={user.profilePicture} // Assuming user.profilePicture is a URL to the image
+          alt={`${user.firstName} ${user.lastName}`}
           sx={{ width: 100, height: 100, marginBottom: 2 }} // Style for Avatar
         /> */}
         <AccountCircleIcon fontSize="large" />
 
         <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
-          {User.firstName}&nbsp;{User.lastName}
+          {user?.firstName}&nbsp;{user?.lastName}
         </Typography>
         <Typography variant="body2" sx={{ color: 'gray', mb: 1 }}>
-          {User.phone}
+          {user?.phone}
         </Typography>
         <Typography variant="body2" sx={{ color: 'gray', mb: 2 }}>
-          {User.devEmail}
+          {user?.devEmail}
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Link href={Path + '/edit'}>
