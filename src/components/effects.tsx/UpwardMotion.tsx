@@ -5,7 +5,7 @@ export default function UpwardMotion({ children }: any) {
   const variants = {
     hidden: {
       opacity: 0,
-      y: 90,
+      y: 120,
     },
     visible: {
       opacity: 1,
