@@ -7,9 +7,9 @@ import theme from './theme';
 import { Provider } from 'react-redux';
 import store, { persistor } from '@/store/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import heroBg1 from '../../public/images/heroBg1.jpg';
-import heroBg2 from '../../public/images/heroBg2.jpg';
-// import heroBg from '../../public/images/heroBg3.jpg';
+import heroBg1 from '@/../public/images/heroBg1.jpg';
+import heroBg2 from '@/../public/images/heroBg2.jpg';
+// import heroBg from '@/../public/images/heroBg3.jpg';
 
 export default function Main({ children }: any) {
   const smScreen = useMediaQuery(theme.breakpoints.down('sm'));
