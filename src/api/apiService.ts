@@ -89,3 +89,7 @@ export const deleteApp = async (id: string) => {
 export const getUsersByAppId = async (appId: string) => {
   return getService(`/app/getAllUsers?appId=${appId}`);
 };
+
+export const checkServer = async () => {
+  return getService(`/`);
+};
