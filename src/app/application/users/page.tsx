@@ -1,15 +1,13 @@
 'use client';
 
-import { deleteApp, getAllApps, getApps, getUsersByAppId } from '@/api/apiService';
+import { deleteApp, getUsersByAppId } from '@/api/apiService';
 import StickyHeadTable from '@/components/table/StickyHeadTable';
 import theme from '@/components/theme';
-import { APPDATA, ENDUSER, RESPONSE, USER } from '@/types/interfaces';
-import { sleep } from '@/util/helper';
+import { ENDUSER, RESPONSE, USER } from '@/types/interfaces';
 import { Box, Button, CircularProgress, Typography, useMediaQuery } from '@mui/material';
 import { redirect, useParams, usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 import { TimeFormatter } from '@/util/timeFormatter';
 import { useRouter } from 'next/navigation';
