@@ -21,10 +21,12 @@ export default function DeleteModal({ title, children, open, handleClose }: any)
     <div>
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {title}
-          </Typography>
-          {children}
+          <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {title}
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 3 }}>{children}</Box>
         </Box>
       </Modal>
     </div>

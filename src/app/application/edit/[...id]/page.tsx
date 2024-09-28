@@ -34,7 +34,6 @@ export default function EditApp() {
   const fetchApp = async () => {
     try {
       const response: APPRESPONSE = await getApp(id);
-      console.log(response);
       if (response.isSuccess) {
         setAppName(response.clientApp.appName);
       } else {

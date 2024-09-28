@@ -1,30 +1,17 @@
 export const TimeFormatter = (timestamp: string): string => {
-  // Convert the timestamp into a JavaScript Date object
-  const date = new Date(timestamp);
+  const utcDate = new Date(timestamp);
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const istTime = utcDate.getTime() + istOffset;
 
-  // Calculate the Indian Standard Time (IST) offset from UTC
-  const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC + 5:30 hours
-  const istTime = new Date(date.getTime() + istOffset);
+  const istDate = new Date(istTime);
 
-  const options: Intl.DateTimeFormatOptions = {
-    month: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    day: '2-digit',
-    year: '2-digit',
-    hour12: false, // use 24-hour format
-    timeZone: 'Asia/Kolkata', // Ensure IST timezone is used
-  };
+  const year = istDate.getUTCFullYear();
+  const month = String(istDate.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+  const day = String(istDate.getUTCDate()).padStart(2, '0');
+  const hours = String(istDate.getUTCHours()).padStart(2, '0');
+  const minutes = String(istDate.getUTCMinutes()).padStart(2, '0');
+  const seconds = String(istDate.getUTCSeconds()).padStart(2, '0');
+  const milliseconds = String(istDate.getUTCMilliseconds()).padStart(3, '0');
 
-  // Format the date using toLocaleString in IST
-  const formattedDate = istTime.toLocaleString('en-IN', options);
-
-  // Split the formatted date into parts
-  const [datePart, timePart] = formattedDate.split(', ');
-
-  // Rearranging to MM:HH DD:MM:YY format
-  const [day, month, year] = datePart.split('/');
-  const [hour, minute] = timePart.split(':');
-
-  return `${month}:${hour} ${day}/${month}/${year}`;
-};
+  return `(${hours}:${minutes}) ${day}/${month}/${year}`;
+}

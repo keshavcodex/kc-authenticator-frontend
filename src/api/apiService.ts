@@ -85,3 +85,7 @@ export const getApp = async (id: string) => {
 export const deleteApp = async (id: string) => {
   return deleteService(`/app/deleteApp?id=${id}`);
 };
+
+export const getUsersByAppId = async (appId: string) => {
+  return getService(`/app/getAllUsers?appId=${appId}`);
+};

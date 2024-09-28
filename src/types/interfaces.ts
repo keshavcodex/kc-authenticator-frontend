@@ -1,3 +1,4 @@
+import { createApp } from '@/api/apiService';
 export interface LOGIN {
   email?: string;
   devEmail: string;
@@ -9,13 +10,25 @@ export interface USER {
   firstName: string;
   lastName: string;
   email?: string;
-  devEmail: string;
+  devEmail?: string;
   password: string;
   phone: string;
 }
 
+export interface ENDUSER {
+  id: string;
+  appId: string;
+  name?: string
+  firstName?: string;
+  lastName?: string;
+  phone: string;
+  email: string;
+  createdAt: string;
+}
+
 export interface RESPONSE {
-  user?: USER;
+  user?: ENDUSER;
+  users: ENDUSER[];
   developer: USER;
   message: string;
   isSuccess: boolean;

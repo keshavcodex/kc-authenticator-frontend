@@ -1,5 +1,4 @@
-import { duration } from '@mui/material';
-import { delay, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function UpwardMotion({ children }: any) {
   const variants = {
@@ -15,7 +14,7 @@ export default function UpwardMotion({ children }: any) {
         stiffness: 60,
         damping: 4,
         duration: 1,
-        delay: 0.5
+        delay: 0.2
       },
     },
   };

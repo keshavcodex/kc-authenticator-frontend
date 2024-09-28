@@ -32,7 +32,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function StickyHeadTable({ columns, data, handleEdit, handleDelete }: any) {
+export default function StickyHeadTable(params: any) {
+  const { columns, data, handleEdit, handleDelete, handleBody } = params;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -78,7 +79,9 @@ export default function StickyHeadTable({ columns, data, handleEdit, handleDelet
             {data.map((row: any, index: number) => (
               <StyledTableRow key={row.id}>
                 {Object.keys(columns ? columns : row).map((cell, jIndex) => (
-                  <StyledTableCell key={jIndex}>{row[cell]}</StyledTableCell>
+                  <StyledTableCell onClick={() => handleBody(row.id)} key={jIndex}>
+                    {row[cell]}
+                  </StyledTableCell>
                 ))}
                 <StyledTableCell key={index} style={{ minWidth: 60 }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-around', cursor: 'pointer' }}>

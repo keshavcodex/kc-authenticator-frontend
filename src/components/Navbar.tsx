@@ -92,23 +92,13 @@ export default function Navbar() {
                   </ListItem>
                   <ListItem
                     onClick={() => {
-                      router.push('/app');
+                      router.push('/application');
                       setDrawerOpen(false);
                     }}
                     sx={{ cursor: 'pointer' }}
                   >
                     <AndroidIcon sx={{ px: 1 }} />
                     <ListItemText primary="Apps" />
-                  </ListItem>
-                  <ListItem
-                    onClick={() => {
-                      router.push('/user');
-                      setDrawerOpen(false);
-                    }}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <GroupsIcon sx={{ px: 1 }} />
-                    <ListItemText primary="Users" />
                   </ListItem>
                 </List>
               </Drawer>
