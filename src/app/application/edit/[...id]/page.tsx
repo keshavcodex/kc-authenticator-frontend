@@ -4,14 +4,11 @@ import { APPRESPONSE, EDITAPP } from '@/types/interfaces';
 import { Box, Button, Card, CardContent, CircularProgress, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import AddIcon from '@mui/icons-material/Add';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import AddTaskIcon from '@mui/icons-material/AddTask';
 import theme from '@/components/theme';
-import { redirect, useParams, usePathname, useRouter, useSearchParams, useSelectedLayoutSegment } from 'next/navigation';
+import { redirect, useParams, useRouter } from 'next/navigation';
 import { MessageList } from '@/components/MessageList';
-import { sleep } from '@/util/helper';
 
 export default function EditApp() {
   const router = useRouter();
@@ -29,8 +26,8 @@ export default function EditApp() {
 
   useEffect(() => {
     fetchApp();
-  }, []);
-  
+  }, [id]);
+
   const fetchApp = async () => {
     try {
       const response: APPRESPONSE = await getApp(id);
@@ -43,7 +40,7 @@ export default function EditApp() {
       console.log(error);
     }
   };
-
+  
   const handleAppEdit = async () => {
     try {
       if (appName === '') {

@@ -10,8 +10,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { redirect, usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-export default function user() {
+export default function Profile() {
   const Path = usePathname();
+
   const user: USER = useSelector((state: any) => state.user.userInfo);
   if (user === null) redirect('/auth');
 

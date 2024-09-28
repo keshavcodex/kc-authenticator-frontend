@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-const getService = async (route: string) => {
+const getService: any = async (route: string) => {
   try {
     const response = await axios.get(`${baseUrl}${route}`);
     return response?.data;
@@ -12,7 +12,7 @@ const getService = async (route: string) => {
   }
 };
 
-export const postService = async (route: string, body?: any) => {
+export const postService: any = async (route: string, body?: any) => {
   try {
     const response = await axios.post(`${baseUrl}${route}`, body);
     return response?.data;
@@ -21,7 +21,7 @@ export const postService = async (route: string, body?: any) => {
   }
 };
 
-export const putService = async (route: string, body: any) => {
+export const putService: any = async (route: string, body: any) => {
   try {
     const response = await axios.put(`${baseUrl}${route}`, body);
     return response?.data;
@@ -30,7 +30,7 @@ export const putService = async (route: string, body: any) => {
   }
 };
 
-export const deleteService = async (route: string, body?: any) => {
+export const deleteService: any = async (route: string, body?: any) => {
   try {
     const response = await axios.delete(`${baseUrl}${route}`, body);
     return response?.data;

@@ -4,14 +4,11 @@ import { CREATEAPP } from '@/types/interfaces';
 import { Box, Button, Card, CardContent, CircularProgress, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import AddIcon from '@mui/icons-material/Add';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import AddTaskIcon from '@mui/icons-material/AddTask';
 import theme from '@/components/theme';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { MessageList } from '@/components/MessageList';
-import { sleep } from '@/util/helper';
 
 export default function CreateApp() {
   const [appName, setAppName] = useState<string>('');

@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 import { TimeFormatter } from '@/util/timeFormatter';
 import { useRouter } from 'next/navigation';
-import DeleteModal from '@/components/DeleteModal';
+import { DeleteModal } from '@/components/DeleteModal';
 
 export default function App() {
   const [userList, setUserList] = useState<Array<ENDUSER>>([]);
