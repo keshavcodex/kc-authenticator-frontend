@@ -102,6 +102,7 @@ export default function Page() {
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                 flex: 1,
               }}
+              onClick={() => router.push('/docs#features')}
             >
               <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
                 Secure & Reliable
@@ -120,6 +121,7 @@ export default function Page() {
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                 flex: 1,
               }}
+              onClick={() => router.push('/docs#frontend-integration')}
             >
               {/* <img src="/images/feature-2.svg" alt="Feature 2" style={{ height: 100, marginBottom: '1.5rem' }} /> */}
               <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
@@ -138,6 +140,7 @@ export default function Page() {
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                 flex: 1,
               }}
+              onClick={() => router.push('/docs#backend-integration')}
             >
               {/* <img src="/images/feature-3.svg" alt="Feature 3" style={{ height: 100, marginBottom: '1.5rem' }} /> */}
               <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>

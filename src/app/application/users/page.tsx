@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteApp, getUsersByAppId } from '@/api/apiService';
+import { deleteApp, deleteUser, getUsersByAppId } from '@/api/apiService';
 import StickyHeadTable from '@/components/table/StickyHeadTable';
 import theme from '@/components/theme';
 import { ENDUSER, RESPONSE, USER } from '@/types/interfaces';
@@ -18,18 +18,17 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [deleteId, setDeleteId] = useState('');
   const [open, setOpen] = useState(false);
-  const smScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdScreen = useMediaQuery(theme.breakpoints.down('md'));
   const router = useRouter();
   const path = usePathname();
   const params = useSearchParams();
-  const params2 = useParams();
 
   const appId = params.get('appId') || '';
   const appName = params.get('appName') || '';
   const user: USER = useSelector((state: any) => state.user.userInfo);
   if (user === null) redirect('/auth');
 
-  const columns = { id: 'ApplicationId', name: 'Name', phone: 'Phone', email: 'Email', createdAt: 'Created At' };
+  const columns = { id: 'UserId', name: 'Name', phone: 'Phone', email: 'Email', createdAt: 'Created At' };
 
   useEffect(() => {
     fetchUserList();
@@ -42,7 +41,7 @@ export default function App() {
       name: usr.firstName + ' ' + usr.lastName,
       phone: usr.phone,
       email: usr.email,
-      createdAt: TimeFormatter(usr.createdAt),
+      createdAt: TimeFormatter(usr.createdAt || ''),
     }));
     return data;
   };
@@ -52,9 +51,7 @@ export default function App() {
       setIsLoading(true);
       const response: RESPONSE = await getUsersByAppId(appId);
       if (response?.isSuccess) {
-        const d = DataFormatter(response.users);
-        console.log(d);
-        setUserList([]);
+        setUserList(DataFormatter(response.users));
       }
       setIsLoading(false);
     } catch (error) {
@@ -63,12 +60,8 @@ export default function App() {
     }
   };
 
-  const handleBody = (id: string) => {
-    router.push(`${path}/users/?appId=${id}`);
-  };
-
   const handleEdit = (id: string) => {
-    router.push(`${path}/edit/${id}`);
+    router.push(`${path}/edit?id=${id}&appId=${appId}`);
   };
 
   const handleDelete = (id: string) => {
@@ -78,11 +71,9 @@ export default function App() {
 
   const confirmDelete = async () => {
     try {
-      const response = await deleteApp(deleteId);
-      if (response.isSuccess) {
-        setOpen(false);
-        fetchUserList();
-      }
+      setOpen(false);
+      await deleteUser(deleteId);
+      fetchUserList();
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +81,7 @@ export default function App() {
 
   return (
     <Box>
-      <DeleteModal title={'Are you surely want to delete this app?'} open={open}>
+      <DeleteModal title={'Do want to delete this user?'} open={open}>
         <Button variant="outlined" color="success" onClick={() => setOpen(false)}>
           Cancle
         </Button>
@@ -98,14 +89,15 @@ export default function App() {
           Delete
         </Button>
       </DeleteModal>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
         <Typography sx={{ color: theme.palette.primary.contrastText, fontFamily: 'cursive', fontSize: 40, textDecorationLine: 'underline' }}>
           {appName}
         </Typography>
+        <Typography sx={{ color: theme.palette.primary.contrastText, fontSize: 25, mb: 2 }}>AppId: {appId}</Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography sx={{ color: theme.palette.primary.contrastText, fontSize: 20 }}>Add new user</Typography>
-        <Link href="/application/user/create">
+        <Link href={`/application/users/create?appId=${appId}&appName=${appName}`}>
           <Button variant="outlined" color="primary" sx={{ color: '#fff', borderColor: '#fff', mx: 5 }}>
             add
           </Button>
@@ -117,15 +109,19 @@ export default function App() {
           <Typography>Fetching Application list</Typography>
         </Box>
       ) : (
-        <Box sx={{ p: smScreen ? 0 : 2 }}>
-          {userList.length > 0 && (
+        <Box sx={{ p: mdScreen ? 0 : 2 }}>
+          {userList.length > 0 ? (
             <StickyHeadTable
               columns={columns}
               data={userList}
               handleEdit={handleEdit}
               handleDelete={handleDelete}
-              handleBody={handleBody}
+              // handleBody={}
             ></StickyHeadTable>
+          ) : (
+            <Typography sx={{ color: '#fff', display: 'flex', justifyContent: 'center', fontSize: 20 }}>
+              Currently there are no users for this app
+            </Typography>
           )}
         </Box>
       )}

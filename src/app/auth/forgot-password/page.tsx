@@ -10,10 +10,8 @@ import MarkEmailReadRoundedIcon from '@mui/icons-material/MarkEmailReadRounded';
 import { Box, Button, Card, CardContent, CircularProgress, Link, TextField, Typography } from '@mui/material';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 export default function ForgotPassword() {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const [email, setEmail] = useState('');
@@ -57,6 +55,12 @@ export default function ForgotPassword() {
     } catch (error) {
       setIsLoading(false);
       console.log(error);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handlePasswordReset();
     }
   };
 
@@ -107,6 +111,7 @@ export default function ForgotPassword() {
                   margin="normal"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={handleKeyDown}
                 />
                 {message.length > 0 &&
                   message.map((text, index) => (

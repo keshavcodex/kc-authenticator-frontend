@@ -62,24 +62,10 @@ export default function StickyHeadTable(params: any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column: any) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })} */}
             {data.map((row: any, index: number) => (
               <StyledTableRow key={row.id}>
                 {Object.keys(columns ? columns : row).map((cell, jIndex) => (
-                  <StyledTableCell onClick={() => handleBody(row.id)} key={jIndex}>
+                  <StyledTableCell onClick={() => handleBody ? handleBody(row.id) : null} key={jIndex} style={{ cursor: handleBody ? 'pointer' : 'default' }}>
                     {row[cell]}
                   </StyledTableCell>
                 ))}

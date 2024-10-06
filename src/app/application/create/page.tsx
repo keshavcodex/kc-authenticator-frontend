@@ -14,7 +14,7 @@ export default function CreateApp() {
   const [appName, setAppName] = useState<string>('');
   const [message, setMessage] = useState<Array<string>>([]);
   const [isAvailable, setIsAvailable] = useState(true);
-  const [isLoading, setILoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
   const user = useSelector((state: any) => state.user.userInfo);
@@ -22,17 +22,17 @@ export default function CreateApp() {
   const handleAppCreate = async () => {
     try {
       if (appName === '') return;
-      setILoading(true);
+      setIsLoading(true);
       const body: CREATEAPP = { devId: user.id, appName };
       const response = await createApp(body);
       if (response.isSuccess) router.back();
       else {
         setMessage([response.message]);
         setIsAvailable(response.isSuccess);
-        setILoading(false);
+        setIsLoading(false);
       }
     } catch (error) {
-      setILoading(false);
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -58,7 +58,7 @@ export default function CreateApp() {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
+    if (isAvailable && event.key === 'Enter') {
       handleAppCreate();
     }
   };

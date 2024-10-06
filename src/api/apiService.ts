@@ -1,4 +1,4 @@
-import { CREATEAPP, EDITAPP, EDITUSER, LOGIN, OTP, PASSWORDRESET, UPDATEPASSWORD } from '@/types/interfaces';
+import { CREATEAPP, EDITAPP, EDITUSER, ENDUSER, LOGIN, OTP, PASSWORDRESET, UPDATEPASSWORD } from '@/types/interfaces';
 import axios from 'axios';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -92,4 +92,20 @@ export const getUsersByAppId = async (appId: string) => {
 
 export const checkServer = async () => {
   return getService(`/`);
+};
+
+export const deleteUser = async (id: string) => {
+  return deleteService(`/app/deleteUser?id=${id}`);
+};
+
+export const createUser = async (body: ENDUSER) => {
+  return postService(`/app/createUser`, body);
+};
+
+export const editEndUser = async (body: any) => {
+  return putService(`/app/editEndUser`, body);
+};
+
+export const getEndUser = async (id: string) => {
+  return getService(`/app/getEndUser?id=${id}`);
 };

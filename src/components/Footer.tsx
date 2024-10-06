@@ -25,7 +25,7 @@ export default function Footer() {
         <Link href="/terms" underline="hover" sx={{ color: '#FFFFFF' }}>
           Terms of Service
         </Link>
-        <Link href="mailto:keshavcodex@gmail.com" underline="hover" sx={{ color: '#FFFFFF' }}>
+        <Link href="mailto:keshavcodex@gmail.com?subject=KC-Auth%20Inquiry" underline="hover" sx={{ color: '#FFFFFF' }}>
           Contact Us
         </Link>
       </Box>

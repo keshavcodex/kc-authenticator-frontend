@@ -25,7 +25,7 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleRegister = async () => {
+  const handlePasswordUpdate = async () => {
     try {
       const body: UPDATEPASSWORD = {
         token: searchParam.get('token') || '',
@@ -54,9 +54,14 @@ export default function Register() {
       console.log(error);
     }
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handlePasswordUpdate();
+    }
+  };
   return (
     <Box>
-      <Typography variant="h4" sx={{ textAlign: 'center' }}></Typography>
       <Box display="flex" justifyContent="center" mt={4}>
         <Card sx={{ maxWidth: 300, boxShadow: 3, pb: 1 }}>
           <CardContent>
@@ -93,6 +98,7 @@ export default function Register() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton aria-label="toggle password visibility" onClick={() => setShowPassword(!showPassword)} edge="end">
@@ -111,6 +117,7 @@ export default function Register() {
                     type={showPassword ? 'text' : 'password'}
                     value={cnfPassword}
                     onChange={(e) => setCnfPassword(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton aria-label="toggle password visibility" onClick={() => setShowPassword(!showPassword)} edge="end">
@@ -139,7 +146,7 @@ export default function Register() {
                     <CircularProgress size={30} variant="indeterminate" />
                   </Box>
                 ) : (
-                  <Button variant="contained" color="primary" onClick={handleRegister} fullWidth sx={{ mt: 1 }}>
+                  <Button variant="contained" color="primary" onClick={handlePasswordUpdate} fullWidth sx={{ mt: 1 }}>
                     confirm
                   </Button>
                 )}

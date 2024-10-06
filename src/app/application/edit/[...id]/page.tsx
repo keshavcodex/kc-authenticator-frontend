@@ -17,7 +17,7 @@ export default function EditApp() {
   const [appName, setAppName] = useState<string>('');
   const [message, setMessage] = useState<Array<string>>([]);
   const [isAvailable, setIsAvailable] = useState(true);
-  const [isLoading, setILoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const user = useSelector((state: any) => state.user.userInfo);
   if (user === null) redirect('/');
@@ -50,17 +50,17 @@ export default function EditApp() {
         setMessage(['App name is already in use']);
         return;
       }
-      setILoading(true);
+      setIsLoading(true);
       const body: EDITAPP = { id, appName };
       const response = await editApp(body);
       if (response.isSuccess) router.back();
       else {
         setMessage([response.message]);
         setIsAvailable(response.isSuccess);
-        setILoading(false);
+        setIsLoading(false);
       }
     } catch (error) {
-      setILoading(false);
+      setIsLoading(false);
       console.log(error);
     }
   };

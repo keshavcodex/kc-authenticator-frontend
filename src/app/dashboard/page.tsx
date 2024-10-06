@@ -7,7 +7,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 export default function Dashboard() {
-  const [statusText, setStatusText] = useState('');
+  const [statusText, setStatusText] = useState('Server down');
   useEffect(() => {
     fetchServerStatus();
   }, []);

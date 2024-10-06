@@ -18,7 +18,8 @@ import { logout } from '@/store/store';
 import { redirect, usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import kcIcon from '@/../public/images/kc-con-white.png'; // Importing the image
+import kcIcon from '/public/images/kc-con-white.png'; // Importing the image
+import Logo from './Logo';
 
 export default function Navbar() {
   const theme = useTheme();
@@ -32,6 +33,8 @@ export default function Navbar() {
   const isAuthenticated = useSelector((state: any) => state.user.isAuthenticated);
 
   useEffect(() => {
+    //exception is new password page
+    if (path.match('/auth/new-password')) return;
     if (isAuthenticated && path.startsWith('/auth')) redirect('/');
   }, []);
 
@@ -56,108 +59,74 @@ export default function Navbar() {
       <AppBar sx={{ bgcolor: '#181818' }} position="static">
         <Toolbar>
           {isDrawerOpen ? (
-            <>
-              <Drawer
-                anchor="left"
-                open={isDrawerOpen}
-                onClose={() => setDrawerOpen(false)}
-                PaperProps={{
-                  sx: {
-                    pt: 1,
-                    backgroundColor: '#333333',
-                    color: '#fff',
-                  },
-                }}
-              >
-                <List>
+            <Drawer
+              anchor="left"
+              open={isDrawerOpen}
+              onClose={() => setDrawerOpen(false)}
+              PaperProps={{
+                sx: { pt: 1, backgroundColor: '#333333', color: '#fff' },
+              }}
+            >
+              <Logo />
+              <List>
+                {[
+                  { label: 'Dashboard', icon: <DashboardIcon sx={{ px: 1 }} />, path: '/dashboard' },
+                  { label: 'Docs', icon: <ArticleIcon sx={{ px: 1 }} />, path: '/docs' },
+                  { label: 'Apps', icon: <AndroidIcon sx={{ px: 1 }} />, path: '/application' },
+                ].map(({ label, icon, path }) => (
                   <ListItem
+                    key={label}
                     onClick={() => {
-                      router.push('/dashboard');
+                      router.push(path);
                       setDrawerOpen(false);
                     }}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <DashboardIcon sx={{ px: 1 }} />
-                    <ListItemText primary="Dashboard" />
+                    {icon}
+                    <ListItemText primary={label} />
                   </ListItem>
-                  <ListItem
-                    onClick={() => {
-                      router.push('/docs');
-                      setDrawerOpen(false);
-                    }}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <ArticleIcon sx={{ px: 1 }} />
-                    <ListItemText primary="Docs" />
-                  </ListItem>
-                  <ListItem
-                    onClick={() => {
-                      router.push('/application');
-                      setDrawerOpen(false);
-                    }}
-                    sx={{ cursor: 'pointer' }}
-                  >
-                    <AndroidIcon sx={{ px: 1 }} />
-                    <ListItemText primary="Apps" />
-                  </ListItem>
-                </List>
-              </Drawer>
-            </>
+                ))}
+              </List>
+            </Drawer>
+          ) : smScreen ? (
+            <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+              <MenuIcon onClick={() => setDrawerOpen(true)} />
+            </IconButton>
           ) : (
-            <>
-              {smScreen ? (
-                <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-                  <MenuIcon onClick={() => setDrawerOpen(true)} />
-                </IconButton>
-              ) : (
-                <>
-                  <Link href="/" style={{ textDecoration: 'none', color: theme.palette.primary.contrastText, paddingRight: 20 }}>
-                    <Image src={kcIcon} alt="KC Icon" width={40} height={40} />
-                  </Link>
-                  <Link href="/dashboard" style={{ textDecoration: 'none', color: theme.palette.primary.contrastText }}>
-                    <Typography sx={{ textDecorationLine: 'none' }} variant="h6">
-                      Dashboard
-                    </Typography>
-                  </Link>
-                  <Link href="/docs" style={{ textDecoration: 'none', color: theme.palette.primary.contrastText }}>
-                    <Typography sx={{ textDecorationLine: 'none', pl: 3 }} variant="h6">
-                      Docs
-                    </Typography>
-                  </Link>
-                  <Link href="/application" style={{ textDecoration: 'none', flex: 110, color: theme.palette.primary.contrastText }}>
-                    <Typography sx={{ textDecorationLine: 'none', pl: 3 }} variant="h6">
-                      Apps
-                    </Typography>
-                  </Link>
-                </>
-              )}
-            </>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Logo />
+              {[
+                { label: 'Dashboard', path: '/dashboard' },
+                { label: 'Docs', path: '/docs' },
+                { label: 'Apps', path: '/application', flex: 110 },
+              ].map(({ label, path, flex }) => (
+                <Link
+                  key={label}
+                  href={path}
+                  style={{
+                    textDecoration: 'none',
+                    color: theme.palette.primary.contrastText,
+                    paddingLeft: 20,
+                    flex: flex || 'auto',
+                  }}
+                >
+                  <Typography variant="h6">{label}</Typography>
+                </Link>
+              ))}
+            </Box>
           )}
 
           {isAuthenticated ? (
             <Box sx={{ display: 'flex', flex: 1, justifyContent: 'flex-end' }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
+              <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
                 <AccountCircle />
               </IconButton>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >

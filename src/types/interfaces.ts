@@ -16,14 +16,15 @@ export interface USER {
 }
 
 export interface ENDUSER {
-  id: string;
+  id?: string;
   appId: string;
-  name?: string
+  name?: string;
   firstName?: string;
   lastName?: string;
   phone: string;
   email: string;
-  createdAt: string;
+  password?: string;
+  createdAt?: string;
 }
 
 export interface RESPONSE {
@@ -74,4 +75,12 @@ export interface APPRESPONSE {
   clientApp: APPDATA;
   isSuccess: boolean;
   message: string;
+}
+
+export interface APIREQUEST {
+  title: string;
+  endpoint: string;
+  description: string;
+  requestBody?: string;
+  requestMethod: string;
 }

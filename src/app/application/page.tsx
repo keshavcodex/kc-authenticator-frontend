@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 import { TimeFormatter } from '@/util/timeFormatter';
 import { useRouter } from 'next/navigation';
-import {DeleteModal} from '@/components/DeleteModal';
+import { DeleteModal } from '@/components/DeleteModal';
 
 export default function App() {
   const [appList, setAppList] = useState<Array<APPDATA>>([]);
@@ -73,11 +73,9 @@ export default function App() {
 
   const confirmDelete = async () => {
     try {
-      const response = await deleteApp(deleteId);
-      if (response.isSuccess) {
-        setOpen(false);
-        fetchAppList();
-      }
+      setOpen(false);
+      await deleteApp(deleteId);
+      fetchAppList();
     } catch (error) {
       console.log(error);
     }
