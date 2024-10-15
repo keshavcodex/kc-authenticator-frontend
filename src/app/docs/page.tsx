@@ -100,7 +100,7 @@ const ApiRequestExample = ({ title, endpoint, description, requestBody, requestM
   );
 };
 
-const ResponsiveDrawer: React.FC<Props> = (props) => {
+const ResponsiveDrawer = (props: any) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const router = useRouter();
@@ -281,7 +281,7 @@ const ResponsiveDrawer: React.FC<Props> = (props) => {
               What is KC Authenticator?
             </Typography>
             <Typography color={textColor}>
-              KC Authenticator is a comprehensive authentication tool designed to help developers securely manage user identities across multiple applications. Whether you're
+              KC Authenticator is a comprehensive authentication tool designed to help developers securely manage user identities across multiple applications. Whether you&aps;re
               developing mobile apps, web apps, or backend systems, KC Authenticator provides a seamless solution to handle user authentication, authorization, and session
               management.
             </Typography>
@@ -381,7 +381,7 @@ const ResponsiveDrawer: React.FC<Props> = (props) => {
           Backend Integration
         </Typography>
         <Typography gutterBottom sx={{ color: '#fff' }}>
-          On the backend, you'll need to ensure that your routes and controllers handle the requests properly. For example, here’s a sample Node.js/Express setup for the login
+          On the backend, you&apos;ll need to ensure that your routes and controllers handle the requests properly. For example, here’s a sample Node.js/Express setup for the login
           route:
         </Typography>
         <CodeSnippet title={'Backend code of login api'}>{`    const login = async () => {
@@ -449,14 +449,14 @@ const ResponsiveDrawer: React.FC<Props> = (props) => {
           </ListItem>
           <ListItem>
             <Typography variant="body2">
-              A: It's recommended to store tokens in HTTP-only cookies. Avoid storing sensitive tokens in <code>localStorage</code> or <code>sessionStorage</code> as they are
+              A: It&apos;s recommended to store tokens in HTTP-only cookies. Avoid storing sensitive tokens in <code>localStorage</code> or <code>sessionStorage</code> as they are
               accessible to JavaScript.
             </Typography>
           </ListItem>
 
           <ListItem>
             <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-              Q: What should I do if a user's session expires?
+              Q: What should I do if a user&apos;s session expires?
             </Typography>
           </ListItem>
           <ListItem>

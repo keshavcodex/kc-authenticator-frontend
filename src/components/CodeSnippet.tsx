@@ -1,7 +1,7 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default ({ title, children }: any) => {
+const CodeSnippet = ({ title, children }: any) => {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
@@ -24,3 +24,5 @@ export default ({ title, children }: any) => {
     </Accordion>
   );
 };
+
+export default CodeSnippet;
