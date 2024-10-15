@@ -232,7 +232,11 @@ const ResponsiveDrawer = (props: any) => {
           <Typography variant="h6" noWrap component="div" sx={{ flex: 1, color: '#fff' }}>
             Documentation
           </Typography>
-          {!isAuthenticated && (
+          {isAuthenticated ? (
+            <Typography variant="h6" noWrap component="div" sx={{ color: '#fff' }} onClick={() => router.push('/application')}>
+              Apps
+            </Typography>
+          ): (
             <Typography variant="h6" noWrap component="div" sx={{ color: '#fff' }} onClick={() => router.push('/auth')}>
               Login
             </Typography>

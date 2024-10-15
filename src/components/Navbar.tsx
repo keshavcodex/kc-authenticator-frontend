@@ -70,7 +70,7 @@ export default function Navbar() {
               <Logo />
               <List>
                 {[
-                  { label: 'Dashboard', icon: <DashboardIcon sx={{ px: 1 }} />, path: '/dashboard' },
+                  // { label: 'Dashboard', icon: <DashboardIcon sx={{ px: 1 }} />, path: '/dashboard' },
                   { label: 'Docs', icon: <ArticleIcon sx={{ px: 1 }} />, path: '/docs' },
                   { label: 'Apps', icon: <AndroidIcon sx={{ px: 1 }} />, path: '/application' },
                 ].map(({ label, icon, path }) => (
@@ -96,7 +96,7 @@ export default function Navbar() {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Logo />
               {[
-                { label: 'Dashboard', path: '/dashboard' },
+                // { label: 'Dashboard', path: '/dashboard' },
                 { label: 'Docs', path: '/docs' },
                 { label: 'Apps', path: '/application', flex: 110 },
               ].map(({ label, path, flex }) => (

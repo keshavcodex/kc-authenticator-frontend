@@ -70,7 +70,7 @@ export default function Page() {
             size="large"
             color="secondary"
             sx={{ bgcolor: '#fff', borderRadius: 50 }}
-            onClick={() => router.push(isAuthenticated ? '/dashboard' : '/docs')}
+            onClick={() => router.push(isAuthenticated ? '/application' : '/docs')}
           >
             Get Started
           </Button>
